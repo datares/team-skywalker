@@ -11,6 +11,10 @@ rawData
 le = LabelEncoder()
 y = le.fit_transform(rawData['koi_pdisposition'])
 X = rawData.drop("koi_pdisposition", axis = 1)
+# drop error columns
+dropCols = X.filter(regex="err\d$").columns
+X = X.drop(dropCols,axis = 1)
+# 
 numericCols = rawData.select_dtypes(np.number).columns.to_list()
 X = X[numericCols]
 ss = StandardScaler()
@@ -28,4 +32,5 @@ RF.fit(X, y)
 features = pd.DataFrame(RF.feature_importances_, X.columns)
 # %%
 features.sort_values(by=0)
+# %%
 # %%
