@@ -11,6 +11,9 @@ rawData
 le = LabelEncoder()
 y = le.fit_transform(rawData['koi_pdisposition'])
 X = rawData.drop("koi_pdisposition", axis = 1)
+#%%
+X.to_csv("cleanData.csv")
+#%%
 # drop error columns
 dropCols = X.filter(regex="err\d$").columns
 X = X.drop(dropCols,axis = 1)
